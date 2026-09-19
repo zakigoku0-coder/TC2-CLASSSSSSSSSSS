@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TC2 Groupe</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="login-grid"></div>
+    <div class="login-orb"></div>
+    <div class="login-orb"></div>
+    <div class="login-orb"></div>
+    <div class="login-card">
+      <h1><span>TC2</span><span> Groupe</span></h1>
+      <p class="login-subtitle">The Ultimate Friend Hangout</p>
+      <form id="login-form">
+        <input type="text" id="login-name" placeholder="Your display name..." autocomplete="off">
+        <button type="submit" id="login-btn">Confirm</button>
+      </form>
+      <div class="login-features">
+        <span>✏️ Draw</span>
+        <span>📞 Voice & Video</span>
+        <span>🎮 Games</span>
+        <span>💬 Chat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app-container" style="display:none">
+    <div class="grid-bg"></div>
+
+    <!-- TOP BAR -->
+<div class="topbar">
+    <div class="logo">TC2 <b>Groupe</b></div>
+    <div class="user-badge">
+      <span id="user-display"></span>
+    </div>
+    <div class="topbar-buttons">
+      <button class="top-btn futuristic-btn" id="btn-call" data-tooltip="Voice & Video Channels">
+        <span class="btn-icon">📞</span>
+        <span class="btn-label">Calls</span>
+        <span class="btn-glow"></span>
+      </button>
+      <button class="top-btn futuristic-btn" id="btn-draw" data-tooltip="Infinite Canvas">
+        <span class="btn-icon">✏️</span>
+        <span class="btn-label">Draw</span>
+        <span class="btn-glow"></span>
+      </button>
+      <button class="top-btn futuristic-btn" id="btn-games" data-tooltip="Game Arcade">
+        <span class="btn-icon">🎮</span>
+        <span class="btn-label">Games</span>
+        <span class="btn-glow"></span>
+      </button>
+      <button class="top-btn futuristic-btn" id="btn-music" data-tooltip="Shared Playlist">
+        <span class="btn-icon">🎵</span>
+        <span class="btn-label">Music</span>
+        <span class="btn-glow"></span>
+      </button>
+      <button class="top-btn futuristic-btn" id="btn-wallpaper" data-tooltip="Custom Wallpaper">
+        <span class="btn-icon">🖼️</span>
+        <span class="btn-label">Wallpaper</span>
+        <span class="btn-glow"></span>
+      </button>
+      <button class="top-btn futuristic-btn" id="btn-memory-book" data-tooltip="Memory Book">
+        <span class="btn-icon">📖</span>
+        <span class="btn-label">Memories</span>
+        <span class="btn-glow"></span>
+      </button>
+    </div>
+  </div>
+
+    <!-- CANVAS AREA -->
+    <div id="canvas-container">
+      <canvas id="draw-canvas"></canvas>
+    </div>
+
+    <!-- DRAWING TOOLBAR -->
+    <div class="toolbar">
+      <button class="tool-btn active" data-tool="draw">✏️</button>
+      <button class="tool-btn" data-tool="eraser">🧽</button>
+      <button class="tool-btn" data-tool="rect">⬜</button>
+      <button class="tool-btn" data-tool="circle">⭕</button>
+      <button class="tool-btn" data-tool="line">📏</button>
+      <button class="tool-btn" data-tool="text">🔤</button>
+      <div class="color-swatches">
+        <div class="color-swatch active" data-color="#00f0ff" style="background:#00f0ff"></div>
+        <div class="color-swatch" data-color="#a855f7" style="background:#a855f7"></div>
+        <div class="color-swatch" data-color="#ec4899" style="background:#ec4899"></div>
+        <div class="color-swatch" data-color="#10b981" style="background:#10b981"></div>
+        <div class="color-swatch" data-color="#f97316" style="background:#f97316"></div>
+        <div class="color-swatch" data-color="#3b82f6" style="background:#3b82f6"></div>
+        <div class="color-swatch" data-color="#ef4444" style="background:#ef4444"></div>
+        <div class="color-swatch" data-color="#eab308" style="background:#eab308"></div>
+        <div class="color-swatch" data-color="#ffffff" style="background:#ffffff"></div>
+        <div class="color-swatch" data-color="#000000" style="background:#000000"></div>
+      </div>
+      <div class="brush-sizes">
+        <button class="brush-size-btn" data-size="2">2</button>
+        <button class="brush-size-btn active" data-size="4">4</button>
+        <button class="brush-size-btn" data-size="8">8</button>
+        <button class="brush-size-btn" data-size="12">12</button>
+        <button class="brush-size-btn" data-size="20">20</button>
+      </div>
+      <div class="tool-actions">
+        <button id="btn-undo">↩️</button>
+        <button id="btn-redo">↪️</button>
+        <button id="btn-export-pdf">📄</button>
+        <button id="btn-clear-canvas">🗑️</button>
+      </div>
+    </div>
+
+    <!-- VOICE PANEL -->
+    <div id="voice-panel" style="display:none">
+      <h3>📞 Voice Channel</h3>
+      <div class="voice-controls">
+        <button id="btn-mute">🎤</button>
+        <button id="btn-video">📷</button>
+        <button id="btn-screen">🖥️</button>
+        <button id="btn-deafen">🔊</button>
+        <button id="btn-leave-call">📴 Leave</button>
+      </div>
+      <video id="screen-share-video" style="display:none;max-width:300px;border-radius:8px;margin-top:10px;" autoplay></video>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div id="chat-panel" style="display:none">
+      <h3>💬 Chat</h3>
+      <div id="chat-messages"></div>
+      <div class="chat-emoji-bar">
+        <button class="emoji-btn">👍</button>
+        <button class="emoji-btn">❤️</button>
+        <button class="emoji-btn">😂</button>
+        <button class="emoji-btn">🔥</button>
+        <button class="emoji-btn">🎮</button>
+        <button class="emoji-btn">🎵</button>
+        <button class="emoji-btn">👀</button>
+        <button class="emoji-btn">✅</button>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button id="chat-send">Send</button>
+      </div>
+    </div>
+
+    <!-- MUSIC PANEL -->
+    <div id="music-panel" style="display:none">
+      <h3>🎵 Listening Together</h3>
+      <div class="now-playing">
+        <strong id="music-now-title">Blinding Lights</strong>
+        <small id="music-now-artist">The Weeknd</small>
+      </div>
+      <div class="progress-container">
+        <div class="progress-track">
+          <div class="progress-bar" id="music-progress-bar"></div>
+        </div>
+        <div class="progress-times">
+          <span id="music-time-current">0:00</span>
+          <span id="music-time-total">3:20</span>
+        </div>
+      </div>
+      <div class="music-controls">
+        <button id="btn-music-prev">⏮️</button>
+        <button id="btn-music-play">▶️</button>
+        <button id="btn-music-next">⏭️</button>
+      </div>
+      <div id="music-playlist"></div>
+    </div>
+
+    <!-- CHANNELS MODAL -->
+    <div id="channels-modal" style="display:none">
+      <div class="channels-modal">
+        <h2>📞 Voice Channels</h2>
+        <p>Choose a channel to join, talk, play & share screen</p>
+        <div class="channel-list" id="channels-grid"></div>
+        <button id="channels-close" class="game-btn">✕ Close</button>
+      </div>
+    </div>
+
+    <!-- GAMES MODAL -->
+    <div id="games-modal" style="display:none">
+      <div class="games-modal">
+        <h2>🎮 Game Arena</h2>
+        <div class="games-grid" id="games-grid"></div>
+        <div id="game-area" style="display:none"></div>
+        <button id="games-close" class="game-btn">✕ Close</button>
+      </div>
+    </div>
+
+    <!-- WALLPAPER MODAL -->
+    <div id="wallpaper-modal" style="display:none">
+      <div class="modal-content">
+        <h3>🖼️ Custom Wallpaper</h3>
+        <p>Upload any image. Only you see this.</p>
+        <div id="wallpaper-preview"></div>
+        <label class="upload-zone">
+          📁 Choose Image
+          <input type="file" id="wallpaper-upload" accept="image/*" hidden>
+        </label>
+        <button id="btn-remove-wallpaper" class="game-btn">🗑️ Remove Wallpaper</button>
+        <button id="wallpaper-close" class="game-btn">✕ Close</button>
+      </div>
+    </div>
+
+    <!-- MEMORY BOOK MODAL -->
+    <div id="memory-modal" style="display:none">
+      <div class="modal-content">
+        <h3>📖 Memory Book</h3>
+        <button id="btn-export-memories" class="game-btn">📄 Export PDF</button>
+        <button id="memory-close" class="game-btn">✕ Close</button>
+        <div id="memories-list"></div>
+        <div class="memory-input-area">
+          <input type="text" id="memory-input" placeholder="Write a memory...">
+          <button id="btn-add-memory">💾 Save</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
